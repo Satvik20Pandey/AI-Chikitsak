@@ -7,7 +7,6 @@ import streamlit as st
 load_dotenv()
 SERP_API_KEY = os.getenv('SERP_API_KEY')
 
-# Load the HospitalsInIndia.csv dataset
 hospitals_df = pd.read_csv('C:\\Users\\Satvik Pandey\\Downloads\\HospitalsInIndia.csv')
 
 def get_disease_info(symptoms):
@@ -30,7 +29,7 @@ def get_disease_info(symptoms):
         return f"Error fetching disease information: {str(e)}"
 
 def get_nearby_hospitals(location):
-    # Filter hospitals based on the user's location
+    
     location_hospitals = hospitals_df[hospitals_df['City'] == location]
     hospital_names = location_hospitals['Hospital'].tolist()
     return hospital_names
@@ -48,10 +47,10 @@ def get_recommended_medicines(symptoms):
     except Exception as e:
         return f"Error fetching recommended medicines: {str(e)}"
 
-# Streamlit App Layout
+
 st.title("Disease Detection and Health Info")
 
-# Display Project Logo
+
 logo_url = r"C:\Users\Satvik Pandey\Downloads\Logo.png" 
 st.image(logo_url, width=150)
 
@@ -63,12 +62,12 @@ custom_symptoms = st.sidebar.text_input("Or enter custom symptoms")
 location = st.sidebar.text_input('Enter your location', '')
 
 if st.sidebar.button('Get Information'):
-    # Combine selected symptoms and custom symptoms
+    
     selected_symptoms = [symptom for symptom, is_checked in symptoms.items() if is_checked]
     symptoms_str = ', '.join(selected_symptoms + [custom_symptoms]).strip()
     
     if symptoms_str:
-        # Fetch disease information
+     
         disease_info = get_disease_info(symptoms_str)
         st.subheader("Disease Information")
         if disease_info != 'No information found.':
@@ -77,7 +76,7 @@ if st.sidebar.button('Get Information'):
         else:
             st.write(disease_info)
         
-        # Fetch nearby hospitals
+        
         hospitals = get_nearby_hospitals(location)
         st.subheader("Nearby Hospitals")
         if hospitals:
@@ -86,7 +85,7 @@ if st.sidebar.button('Get Information'):
         else:
             st.write("No hospitals found or error occurred.")
         
-        # Fetch recommended medicines
+        
         recommended_medicines = get_recommended_medicines(symptoms_str)
         st.subheader("Common Recommended Medicines")
         if recommended_medicines != 'No information found.':
