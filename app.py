@@ -60,7 +60,7 @@ symptom_options = ["Fever", "Cough", "Headache", "Nausea", "Fatigue"]
 symptoms = {symptom: st.sidebar.checkbox(symptom) for symptom in symptom_options}
 custom_symptoms = st.sidebar.text_input("Or enter custom symptoms")
 
-location = st.sidebar.text_input('Enter your location', 'New Delhi')
+location = st.sidebar.text_input('Enter your location', '')
 
 if st.sidebar.button('Get Information'):
     # Combine selected symptoms and custom symptoms
