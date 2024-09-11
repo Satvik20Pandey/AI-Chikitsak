@@ -18,7 +18,13 @@ def get_disease_info(symptoms):
         response = requests.get(url)
         response.raise_for_status()
         results = response.json()
+        # Extracting disease name and brief description
         disease_info = results.get('organic_results', [{}])[0].get('snippet', 'No information found.')
+        
+        # Simplify the disease info extraction
+        if 'COVID-19' in disease_info:
+            disease_info = "COVID-19: A disease caused by the coronavirus SARS-CoV-2, characterized by fever, cough, and difficulty breathing."
+        
         return disease_info
     except Exception as e:
         return f"Error fetching disease information: {str(e)}"
@@ -62,7 +68,7 @@ if st.sidebar.button('Get Information'):
         st.subheader("Disease Information")
         if disease_info != 'No information found.':
             st.write("**Disease Information:**")
-            st.write(f"• {disease_info.replace('. ', '.\n• ')}")
+            st.write(f"• {disease_info}")
         else:
             st.write(disease_info)
         
@@ -80,7 +86,7 @@ if st.sidebar.button('Get Information'):
         st.subheader("Common Recommended Medicines")
         if recommended_medicines != 'No information found.':
             st.write("**Recommended Medicines:**")
-            st.write(f"• {recommended_medicines.replace('. ', '.\n• ')}")
+            st.write(f"• {recommended_medicines}")
         else:
             st.write(recommended_medicines)
     else:
