@@ -60,7 +60,11 @@ if st.sidebar.button('Get Information'):
         # Fetch disease information
         disease_info = get_disease_info(symptoms_str)
         st.subheader("Disease Information")
-        st.write(disease_info)
+        if disease_info != 'No information found.':
+            st.write("**Disease Information:**")
+            st.write(f"• {disease_info.replace('. ', '.\n• ')}")
+        else:
+            st.write(disease_info)
         
         # Fetch nearby hospitals
         hospitals = get_nearby_hospitals(location)
@@ -74,6 +78,10 @@ if st.sidebar.button('Get Information'):
         # Fetch recommended medicines
         recommended_medicines = get_recommended_medicines(symptoms_str)
         st.subheader("Common Recommended Medicines")
-        st.write(recommended_medicines)
+        if recommended_medicines != 'No information found.':
+            st.write("**Recommended Medicines:**")
+            st.write(f"• {recommended_medicines.replace('. ', '.\n• ')}")
+        else:
+            st.write(recommended_medicines)
     else:
         st.write("Please enter at least one symptom.")
