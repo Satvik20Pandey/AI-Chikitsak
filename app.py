@@ -7,6 +7,9 @@ import streamlit as st
 load_dotenv()
 SERP_API_KEY = os.getenv('SERP_API_KEY')
 
+# Load the HospitalsInIndia.csv dataset
+hospitals_df = pd.read_csv('C:\\Users\\Satvik Pandey\\Downloads\\HospitalsInIndia.csv')
+
 def get_disease_info(symptoms):
     query = f"disease information based on symptoms {symptoms}"
     url = f"https://serpapi.com/search.json?api_key={SERP_API_KEY}&q={query}"
@@ -21,17 +24,10 @@ def get_disease_info(symptoms):
         return f"Error fetching disease information: {str(e)}"
 
 def get_nearby_hospitals(location):
-    query = f"nearby hospitals in {location}"
-    url = f"https://serpapi.com/search.json?api_key={SERP_API_KEY}&q={query}"
-    
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        results = response.json()
-        hospitals = [result['name'] for result in results.get('local_results', [])]
-        return hospitals
-    except Exception as e:
-        return [f"Error fetching hospitals: {str(e)}"]
+    # Filter hospitals based on the user's location
+    location_hospitals = hospitals_df[hospitals_df['City'] == location]
+    hospital_names = location_hospitals['Hospital'].tolist()
+    return hospital_names
 
 def get_recommended_medicines(symptoms):
     query = f"common medicines for symptoms {symptoms}"
