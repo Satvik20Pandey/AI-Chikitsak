@@ -115,6 +115,8 @@
             border-radius: 8px;
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            color: black;  /* Set font color to black */
+            display: none; /* Hidden by default */
         }
 
         @keyframes spin {
@@ -173,7 +175,7 @@
             <button>Examine Yourself</button>
         </a>
         
-        <div id="user-details" class="user-details" style="display: none;">
+        <div id="user-details" class="user-details">
             <h3>User Details:</h3>
             <p id="patient-id">Patient ID: </p>
             <p id="patient-name">Patient Name: </p>
