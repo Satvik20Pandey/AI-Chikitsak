@@ -43,6 +43,7 @@
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             animation: fadeInUp 1s ease-in-out;
+            position: relative;
         }
 
         .signup-form {
@@ -105,6 +106,17 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
+        .user-details {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -141,7 +153,7 @@
     <div class="background-image"></div>
     <div class="container">
         <h2 style="color:black;">Signup</h2>
-        <form class="signup-form">
+        <form class="signup-form" id="signup-form">
             <input type="text" id="name" name="name" placeholder="Full Name" required>
             <input type="email" id="email" name="email" placeholder="Email" required>
             <input type="password" id="password" name="password" placeholder="Password" required>
@@ -160,6 +172,37 @@
         <a href="http://localhost:8501" target="_blank">
             <button>Examine Yourself</button>
         </a>
+        
+        <div id="user-details" class="user-details" style="display: none;">
+            <h3>User Details:</h3>
+            <p id="patient-id">Patient ID: </p>
+            <p id="patient-name">Patient Name: </p>
+            <p id="patient-email">Email: </p>
+        </div>
     </div>
+
+    <script>
+        let userCount = 0;  // To keep track of the number of users
+        
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent form submission
+            
+            // Get user input
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            
+            // Increment user count
+            userCount += 1;
+            
+            // Update user details display
+            document.getElementById('user-details').style.display = 'block';
+            document.getElementById('patient-id').textContent = `Patient ID: ${userCount}`;
+            document.getElementById('patient-name').textContent = `Patient Name: ${name}`;
+            document.getElementById('patient-email').textContent = `Email: ${email}`;
+            
+            // Clear the form fields
+            document.getElementById('signup-form').reset();
+        });
+    </script>
 </body>
 </html>
