@@ -48,7 +48,12 @@ def get_recommended_medicines(symptoms):
     except Exception as e:
         return f"Error fetching recommended medicines: {str(e)}"
 
+# Streamlit App Layout
 st.title("Disease Detection and Health Info")
+
+# Display Project Logo
+logo_url = "C:\Users\Satvik Pandey\Downloads\Logo.png" 
+st.image(logo_url, width=150)
 
 st.sidebar.header("Input Symptoms")
 symptom_options = ["Fever", "Cough", "Headache", "Nausea", "Fatigue"]
@@ -91,3 +96,8 @@ if st.sidebar.button('Get Information'):
             st.write(recommended_medicines)
     else:
         st.write("Please enter at least one symptom.")
+
+# Display Images for Context
+st.subheader("Visual Information")
+st.image("https://example.com/stomach-ache.png", caption="Stomach Ache")  # Replace with actual image URL
+st.image("https://example.com/human-body.png", caption="Human Body")  # Replace with actual image URL
