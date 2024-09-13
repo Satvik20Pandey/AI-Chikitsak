@@ -51,7 +51,7 @@ def get_recommended_medicines(symptoms):
 st.title("Disease Detection and Health Info")
 
 
-logo_url = r"C:\Users\Satvik Pandey\Downloads\Logo.png" 
+logo_url = r"C:\Users\Satvik Pandey\Downloads\Logo.jpg" 
 st.image(logo_url, width=150)
 
 st.sidebar.header("Input Symptoms")
