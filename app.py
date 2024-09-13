@@ -7,7 +7,7 @@ import streamlit as st
 load_dotenv()
 SERP_API_KEY = os.getenv('SERP_API_KEY')
 
-hospitals_df = pd.read_csv('C:\\Users\\Satvik Pandey\\Downloads\\HospitalsInIndia.csv')
+hospitals_df = pd.read_csv('Help Files/HospitalsInIndia.csv')
 
 def get_disease_info(symptoms):
     query = f"disease information based on symptoms {symptoms}"
@@ -17,10 +17,10 @@ def get_disease_info(symptoms):
         response = requests.get(url)
         response.raise_for_status()
         results = response.json()
-        # Extracting disease name and brief description
+      
         disease_info = results.get('organic_results', [{}])[0].get('snippet', 'No information found.')
         
-        # Simplify the disease info extraction
+     
         if 'COVID-19' in disease_info:
             disease_info = "COVID-19: A disease caused by the coronavirus SARS-CoV-2, characterized by fever, cough, and difficulty breathing."
         
@@ -51,7 +51,7 @@ def get_recommended_medicines(symptoms):
 st.title("Disease Detection and Health Info")
 
 
-logo_url = r"C:\Users\Satvik Pandey\Downloads\Logo.jpg" 
+logo_url = r"Help Files/Logo.jpg" 
 st.image(logo_url, width=150)
 
 st.sidebar.header("Input Symptoms")
